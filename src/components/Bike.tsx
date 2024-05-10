@@ -2,7 +2,11 @@ import { useLoader } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { Mesh } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { HoverOpacityEnter, HoverOpacityLeave } from "../utils/HoverOpacity";
+import {
+  HoverOpacityEnter,
+  HoverOpacityLeave,
+  ResetOpacity,
+} from "../utils/HoverOpacity";
 
 export const Bike = (props: any) => {
   const ref = useRef(null);
@@ -18,6 +22,12 @@ export const Bike = (props: any) => {
       });
     }
   }, [ref.current]);
+
+  useEffect(() => {
+    if (props.resetCamera) {
+      ResetOpacity(gltf);
+    }
+  }, [props.resetCamera]);
 
   const handleMouseOver = (e: any) => {
     e.stopPropagation();

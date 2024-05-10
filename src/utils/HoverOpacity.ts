@@ -22,3 +22,12 @@ export const HoverOpacityLeave = (gltf: GLTF, name: string) => {
     }
   });
 };
+
+export const ResetOpacity = (gltf: GLTF) => {
+  gltf.scene.traverse((child) => {
+    if (child instanceof Mesh) {
+      child.material.opacity = 1;
+      child.material.needsUpdate = true;
+    }
+  });
+};
